@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.0",
-    "express": "latest"
+    "express": "latest",
+    "cors": "^2.8.5",
   },
   "engines": {
     "node": "4.7.0"
