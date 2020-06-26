@@ -8,13 +8,11 @@ router.get('/',(req,resp)=>{
  var url ="https://api.themoviedb.org/3/movie/top_rated?api_key=53d7e674926499a485a2f6bed92cdedb";
 
 var settings = { method: "Get" };
-var dataa=new Object();
 fetch(url, settings)
     .then(res => res.json())
     .then((data) => {
         console.log((data));
-        dataa=(data);
-        resp.json(dataa);
+        resp.json(data);
     });
 });
 
