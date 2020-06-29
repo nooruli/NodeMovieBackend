@@ -1,5 +1,5 @@
 var express=require('express');
-var cors = require('cors')
+var cors = require('cors');
 
 var trendingRoute=require('./routes/trending.js');
 var searchRoute=require('./routes/search.js');
