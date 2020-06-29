@@ -5,6 +5,7 @@ var trendingRoute=require('./routes/trending.js');
 var searchRoute=require('./routes/search.js');
 var getfavRoute=require('./routes/getfav.js');
 var addfavRoute=require('./routes/addfav.js');
+var delfavRoute=require('./routes/deletefav.js');
 
 var app=express();
 app.use(cors());
@@ -16,6 +17,7 @@ app.use('/',trendingRoute);
 app.use('/search',searchRoute);
 app.use('/getfav',getfavRoute);
 app.use('/addfav',addfavRoute);
+app.use('/delfav',delfavRoute);
 
 app.listen(app.get('port'),function(){
   console.log("Node app is running 0n "+app.get('port'))
