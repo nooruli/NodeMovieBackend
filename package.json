@@ -21,6 +21,6 @@
     "pg": "^8.2.1"
   },
   "engines": {
-    "node": "4.7.0"
+    "node": "latest"
   }
 }
