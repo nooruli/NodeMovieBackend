@@ -1,4 +1,4 @@
-var pg = require('pg');
+const { Client } = require('pg');
 var express=require('express');
 var fetch=require('node-fetch');
 var router = express.Router();
@@ -11,26 +11,26 @@ router.get('/:id',(req,res)=>{
   .then(res=>res.json())
   .then(data=>
   {
+  var DATABASE_URL="postgres://ubvrsggnkyomah:a6d43665456f3d123013c69c878738e8edead869a4b26356baa432a01e013931@ec2-35-153-12-59.compute-1.amazonaws.com:5432/d66jmdqke3ae0h";
 
-      var conString = "postgres://ebobuoul:uz8TZ_oQueJ768MnuGmUoxWtN5Lv_ws9@ruby.db.elephantsql.com:5432/ebobuoul" //Can be found in the Details page
-var client = new pg.Client(conString);
-client.connect(function(err) {
-  if(err) {
-    return console.error('could not connect to postgres', err);
+const client = new Client({
+  connectionString: DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
-  
-  client.query(`insert into movie values('${data.adult}','${data.backdrop_path}','${data.id}','${data.original_language}','${data.original_title}','${data.overview}','${data.release_date}','${data.vote_average}','${data.vote_count}','${data.popularity}')`, function(err, result) {
-    if(err) {
-      return console.error('error running query', err);
-    }
-    console.log("added to favourites");
-    client.end();
-  });
 });
-  res.json({status:"true"});
-   
+
+client.connect();
+
+client.query(`insert into movie values('${data.adult}','${data.backdrop_path}','${data.id}','${data.original_language}','${data.original_title}','${data.overview}','${data.release_date}','${data.vote_average}','${data.vote_count}','${data.popularity}')`, (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
   });
-   
+    res.json({status:"true"});
    });
 
 module.exports=router;
