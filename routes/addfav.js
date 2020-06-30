@@ -20,9 +20,14 @@ const client = new Client({
   }
 });
 
+  var temp1=`${data.original_title}`;
+  var original_title=temp1.replace("'","^");
+  var temp2=`${data.overview}`;
+  var overview=temp2.replace("'","^");
+       
 client.connect();
 
-client.query(`insert into movie values('${data.adult}','${data.backdrop_path}','${data.id}','${data.original_language}','${data.original_title}','${data.overview}','${data.release_date}','${data.vote_average}','${data.vote_count}','${data.popularity}')`, (err, res) => {
+client.query(`insert into movie values('${data.adult}','${data.backdrop_path}','${data.id}','${data.original_language}','${original_title}','${overview}','${data.release_date}','${data.vote_average}','${data.vote_count}','${data.popularity}')`, (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
     console.log(JSON.stringify(row));
