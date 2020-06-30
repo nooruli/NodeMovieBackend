@@ -23,7 +23,7 @@ const client = new Client({
   var temp1=`${data.original_title}`;
   var original_title=temp1.replace("'","^");
   var temp2=`${data.overview}`;
-  var overview=temp2.replace("'","^");
+  var overview=temp2.replace(/'/g,"^"); 
        
 client.connect();
 
